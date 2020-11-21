@@ -20,14 +20,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(viewModelClass).apply {
-            msgText.observe(viewLifecycleOwner, {
-                dialogHelper.msgDialog(requireContext(), msg = it)
-            })
-            loading.observe(viewLifecycleOwner, {
-
-            })
-        }
+        viewModel = ViewModelProvider(this).get(viewModelClass)
     }
 
     override fun onCreateView(
@@ -35,6 +28,18 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.apply {
+            msgText.observe(viewLifecycleOwner, {
+                dialogHelper.msgDialog(requireContext(), msg = it)
+            })
+            loading.observe(viewLifecycleOwner, {
+                if (it) {
+                    progressOn()
+                } else {
+                    progressOff()
+                }
+            })
+        }
         viewBinding = initBinding(inflater, container, savedInstanceState)
         initView()
         return viewBinding.root

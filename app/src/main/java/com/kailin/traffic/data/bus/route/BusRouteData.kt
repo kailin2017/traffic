@@ -3,8 +3,8 @@ package com.kailin.traffic.data.bus.route
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.kailin.traffic.data.bus.BusDBConverters
 import com.kailin.traffic.data.bus.NameType
-import com.kailin.traffic.data.bus.NameTypeConverters
 
 /**
 BusRoute {
@@ -68,15 +68,14 @@ data class BusRouteData(
     val FareBufferZoneDescriptionEn: String,
     val FareBufferZoneDescriptionZh: String,
     val HasSubRoutes: Boolean,
-    val Operators: List<Operator>,
+    var Operators: List<Operator>,
     val ProviderID: String,
     val RouteID: String,
     val RouteMapImageUrl: String,
-    @TypeConverters(NameTypeConverters::class)
     val RouteName: NameType,
     @PrimaryKey
     val RouteUID: String,
-    val SubRoutes: List<SubRoute>,
+    var SubRoutes: List<SubRoute>,
     val TicketPriceDescriptionEn: String,
     val TicketPriceDescriptionZh: String,
     val UpdateTime: String,

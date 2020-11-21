@@ -1,5 +1,6 @@
 package com.kailin.traffic.data.bus
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -7,6 +8,7 @@ import com.kailin.traffic.data.bus.route.BusRouteData
 import com.kailin.traffic.data.bus.version.BusVersionData
 import io.reactivex.rxjava3.core.Single
 
+@Dao
 interface BusDao {
 
     @Query("SELECT * FROM BusVersionData WHERE CityName = :CityName AND VersionID < :VersionID ")
