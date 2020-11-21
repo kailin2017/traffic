@@ -1,10 +1,10 @@
-package com.kailin.traffic.ui.notifications
+package com.kailin.traffic.ui.main.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.kailin.traffic.app.BaseViewModel
 
-class NotificationsViewModel : ViewModel() {
+class NotificationsViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
