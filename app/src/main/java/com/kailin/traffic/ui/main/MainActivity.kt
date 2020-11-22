@@ -1,28 +1,25 @@
 package com.kailin.traffic.ui.main
 
-import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.LayoutInflater
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kailin.traffic.R
 import com.kailin.traffic.app.BaseActivity
+import com.kailin.traffic.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+    override val viewModelClass: Class<MainViewModel> = MainViewModel::class.java
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-        ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    override fun initBinding(inflater: LayoutInflater): ActivityMainBinding =
+        ActivityMainBinding.inflate(inflater)
+
+    override fun initView() {
+        findNavController(R.id.nav_host_fragment).apply {
+            viewBinding.navView.setupWithNavController(this)
+        }
+        viewModel.initData()
     }
 }

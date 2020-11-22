@@ -65,6 +65,7 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava3:rxjava:$rx_java_version"
     implementation "io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava3:rxandroid:$rx_android_version"
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     // Navigation

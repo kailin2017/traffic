@@ -10,13 +10,13 @@ import retrofit2.http.Path
 
 interface BusService {
 
-    @GET("${APIConfig.API_URL_V2_BUS_VERSION}/{city}?&\$format=JSON")
+    @GET("${APIConfig.API_URL_V2_BUS_VERSION}/{city}?\$format=JSON")
     fun getBusVersion(@Path("city") city: String): Single<BusVersionData>
 
-    @GET("${APIConfig.API_URL_V2_BUS_ROUTE}/{city}?&\$format=JSON")
+    @GET("${APIConfig.API_URL_V2_BUS_ROUTE}/{city}?\$format=JSON")
     fun getBusRoute(@Path("city") city: String): Single<List<BusRouteData>>
 
-    @GET("${APIConfig.API_URL_V2_BUS_ESTIMATED_TIME}/{city}/{route}?&\$format=JSON")
+    @GET("${APIConfig.API_URL_V2_BUS_ESTIMATED_TIME}/{city}/{route}?\$format=JSON")
     fun getEstimatedTime(@Path("city") city: String, @Path("route") route: String)
 
     companion object {

@@ -61,11 +61,11 @@ data class BusRouteData(
     val BusRouteType: Int,
     val City: String,
     val CityCode: String,
-    val DepartureStopNameEn: String,
+    val DepartureStopNameEn: String?,
     val DepartureStopNameZh: String,
-    val DestinationStopNameEn: String,
+    val DestinationStopNameEn: String?,
     val DestinationStopNameZh: String,
-    val FareBufferZoneDescriptionEn: String,
+    val FareBufferZoneDescriptionEn: String?,
     val FareBufferZoneDescriptionZh: String,
     val HasSubRoutes: Boolean,
     var Operators: List<Operator>,
@@ -76,7 +76,7 @@ data class BusRouteData(
     @PrimaryKey
     val RouteUID: String,
     var SubRoutes: List<SubRoute>,
-    val TicketPriceDescriptionEn: String,
+    val TicketPriceDescriptionEn: String?,
     val TicketPriceDescriptionZh: String,
     val UpdateTime: String,
     val VersionID: Int

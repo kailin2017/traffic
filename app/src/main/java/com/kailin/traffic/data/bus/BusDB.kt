@@ -7,6 +7,7 @@ import androidx.room.TypeConverters
 import com.kailin.traffic.app.KailinApplication
 import com.kailin.traffic.data.bus.route.BusRouteData
 import com.kailin.traffic.data.bus.version.BusVersionData
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
 @Database(
@@ -17,23 +18,7 @@ import io.reactivex.rxjava3.core.Single
 @TypeConverters(BusDBConverters::class)
 abstract class BusDB : RoomDatabase() {
 
-    protected abstract val busDao: BusDao
-
-//    override fun getBusVersionData(CityName: String, VersionID: Int): Single<List<BusVersionData>> {
-//        return busDao.getBusVersionData(CityName, VersionID)
-//    }
-//
-//    override fun insertBusVersionData(data: List<BusVersionData>): Single<List<Long>> {
-//        return busDao.insertBusVersionData(data)
-//    }
-//
-//    override fun getBusRouteData(routeName: String): Single<List<BusRouteData>> {
-//        return busDao.getBusRouteData(routeName)
-//    }
-//
-//    override fun insertBusRouteData(data: List<BusRouteData>): Single<List<Long>> {
-//        return busDao.insertBusRouteData(data)
-//    }
+    abstract val busDao: BusDao
 
     companion object {
         val instance: BusDB by lazy {
