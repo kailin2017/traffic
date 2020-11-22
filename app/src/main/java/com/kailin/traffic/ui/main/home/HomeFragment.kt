@@ -22,6 +22,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initView() {
-        viewModel.text.observe(viewLifecycleOwner, { viewBinding.textHome.text = it })
+
     }
 }
