@@ -14,7 +14,7 @@ interface BusService {
     fun getBusVersion(@Path("city") city: String): Single<BusVersionData>
 
     @GET("${APIConfig.API_URL_V2_BUS_ROUTE}/{city}?\$format=JSON")
-    fun getBusRoute(@Path("city") city: String): Single<List<BusRouteData>>
+    fun getBusRoute(@Path("city") city: String): Single<MutableList<BusRouteData>>
 
     @GET("${APIConfig.API_URL_V2_BUS_ESTIMATED_TIME}/{city}/{route}?\$format=JSON")
     fun getEstimatedTime(@Path("city") city: String, @Path("route") route: String)

@@ -12,12 +12,12 @@ class RxJavaHelper {
         vm: BaseViewModel,
         maybe: Maybe<T>,
         cbSuccess: (T) -> Unit,
-        sbComplete: () -> Unit
+        cbComplete: () -> Unit
     ) {
         maybe
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(RxMaybeObserver.create(vm::onError, cbSuccess, sbComplete))
+            .subscribe(RxMaybeObserver.create(vm::onError, cbSuccess, cbComplete))
     }
 
     fun <T> single(vm: BaseViewModel, single: Single<T>, callBack: (T) -> Unit) {

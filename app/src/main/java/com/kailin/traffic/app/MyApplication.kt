@@ -3,7 +3,7 @@ package com.kailin.traffic.app
 import android.app.Application
 import com.kailin.traffic.util.firebase.AnalyticsUtil
 
-class KailinApplication : Application() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -12,6 +12,6 @@ class KailinApplication : Application() {
     }
 
     companion object {
-        lateinit var instance: KailinApplication
+        lateinit var instance: MyApplication
     }
 }

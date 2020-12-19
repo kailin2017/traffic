@@ -1,7 +1,7 @@
 package com.kailin.traffic.util.connect
 
 import com.kailin.traffic.R
-import com.kailin.traffic.app.KailinApplication
+import com.kailin.traffic.app.MyApplication
 import com.kailin.traffic.util.GsonHelper
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -45,7 +45,7 @@ class RetrofitManager private constructor() {
             val keyStorePassword = "fuckPassword".toCharArray()
 
             val keyStore = KeyStore.getInstance(KeyStore.getDefaultType()).apply {
-                val inputStream = KailinApplication.instance.resources.openRawResource(R.raw.ptx)
+                val inputStream = MyApplication.instance.resources.openRawResource(R.raw.ptx)
                 load(null, keyStorePassword)
                 setCertificateEntry(
                     "ptx",

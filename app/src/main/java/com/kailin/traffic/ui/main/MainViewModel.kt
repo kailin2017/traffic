@@ -52,7 +52,7 @@ class MainViewModel : BaseViewModel() {
         }
     }
 
-    private fun insertBusRouteData(data: List<BusRouteData>) {
+    private fun insertBusRouteData(data: MutableList<BusRouteData>) {
         rxJavaHelper.single(this, busDao.insertBusRouteData(data)) {}
     }
 }

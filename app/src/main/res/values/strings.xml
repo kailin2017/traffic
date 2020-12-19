@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="search_label">搜尋</string>
+    <string name="search_null">查無相關路線</string>
+    <string name="search_route_from_to">%1$s-%2$s</string>
 </resources>

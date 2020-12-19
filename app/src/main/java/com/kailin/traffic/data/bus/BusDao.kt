@@ -19,8 +19,8 @@ interface BusDao {
     fun insertBusVersionData(data: BusVersionData): Single<Long>
 
     @Query("SELECT * FROM BusRouteData WHERE RouteName LIKE '%' || :routeName || '%' LIMIT 15")
-    fun getBusRouteData(routeName: String): List<BusRouteData>
+    fun searchBusRouteData(routeName: String): Maybe<MutableList<BusRouteData>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBusRouteData(data: List<BusRouteData>): Single<List<Long>>
+    fun insertBusRouteData(data: List<BusRouteData>): Single<MutableList<Long>>
 }

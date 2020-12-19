@@ -36,8 +36,8 @@ android {
             }
         }
     }
-    buildFeatures {
-        viewBinding true
+    dataBinding {
+        enabled = true
     }
     compileOptions {
         sourceCompatibility jdk_version
@@ -67,7 +67,9 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version"
     implementation "io.reactivex.rxjava3:rxandroid:$rx_android_version"
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"

@@ -13,6 +13,8 @@ class NotificationsFragment : BaseFragment<NotificationsViewModel, FragmentNotif
 
     override val viewModelClass = NotificationsViewModel::class.java
 
+    override val viewLayoutRes = R.layout.fragment_notifications
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,13 +25,6 @@ class NotificationsFragment : BaseFragment<NotificationsViewModel, FragmentNotif
         viewModel.text.observe(viewLifecycleOwner, { textView.text = it })
         return root
     }
-
-    override fun initBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): FragmentNotificationsBinding =
-        FragmentNotificationsBinding.inflate(inflater, container, false)
 
     override fun initView() {
 

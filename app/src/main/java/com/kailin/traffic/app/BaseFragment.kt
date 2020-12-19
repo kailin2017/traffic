@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.ViewBinding
 import com.kailin.traffic.widget.DialogHelper
 
-abstract class BaseFragment<T : BaseViewModel, B : ViewBinding> : Fragment() {
+abstract class BaseFragment<M : BaseViewModel, V : ViewDataBinding> : Fragment() {
 
-    protected lateinit var viewModel: T
-    protected lateinit var viewBinding: B
+    protected lateinit var viewModel: M
+    protected lateinit var viewDataBinding: V
 
-    protected abstract val viewModelClass: Class<T>
+    protected abstract val viewModelClass: Class<M>
+    protected abstract val viewLayoutRes: Int
 
     protected val dialogHelper = DialogHelper.instance
 
@@ -28,6 +32,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewDataBinding = DataBindingUtil.inflate(inflater, viewLayoutRes, container, false)
         viewModel.apply {
             msgText.observe(viewLifecycleOwner, {
                 dialogHelper.msgDialog(requireContext(), msg = it)
@@ -40,20 +45,26 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding> : Fragment() {
                 }
             })
         }
-        viewBinding = initBinding(inflater, container, savedInstanceState)
-        initView()
-        return viewBinding.root
+        return viewDataBinding.root
     }
 
-    protected abstract fun initBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): B
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initView()
+    }
 
     protected abstract fun initView()
 
     protected fun progressOn() {}
 
     protected fun progressOff() {}
+
+    protected fun setToolbar(toolbar: Toolbar) {
+        requireActivity().apply {
+            if (this is AppCompatActivity) {
+                setSupportActionBar(toolbar)
+                setHasOptionsMenu(true)
+            }
+        }
+    }
 }
