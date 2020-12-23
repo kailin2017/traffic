@@ -11,9 +11,13 @@ import com.kailin.traffic.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : BaseFragment<NotificationsViewModel, FragmentNotificationsBinding>() {
 
-    override val viewModelClass = NotificationsViewModel::class.java
+    override val viewModel: NotificationsViewModel by viewModels()
 
-    override val viewLayoutRes = R.layout.fragment_notifications
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = FragmentNotificationsBinding.inflate(inflater, container, false)
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,26 +1,30 @@
 package com.kailin.traffic.app
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kailin.traffic.widget.recyclerView.MyRecyclerDiffCallBack
 
-abstract class MyRecyclerAdapter<V : ViewDataBinding, D> : RecyclerView.Adapter<ViewHolder<V>>() {
+abstract class MyRecyclerAdapter<V : ViewDataBinding, D>(private val onItemClick: View.OnClickListener? = null) :
+    RecyclerView.Adapter<ViewHolder<V>>() {
 
-    private lateinit var viewDataBinding: V
     protected abstract val viewLayoutRes: Int
     protected val data: MutableList<D> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<V> {
-        createBinding(parent, viewType)
-        return ViewHolder(viewDataBinding)
+        return ViewHolder(createBinding(parent, viewType)).apply {
+            binding.root.setOnClickListener(onItemClick)
+        }
     }
 
-    private fun createBinding(parent: ViewGroup, viewType: Int) {
-        viewDataBinding = DataBindingUtil.inflate(
+    private fun createBinding(parent: ViewGroup, viewType: Int): V {
+        return DataBindingUtil.inflate(
             LayoutInflater.from(parent.context), viewLayoutRes, parent, false
         )
     }
@@ -28,16 +32,18 @@ abstract class MyRecyclerAdapter<V : ViewDataBinding, D> : RecyclerView.Adapter<
     override fun getItemCount() = data.size
 
     fun updateData(newData: MutableList<D>) {
-        calculateDiff(MyRecyclerDiffCallBack(data, newData), newData)
+        calculateDiff(data, newData)
     }
 
-    fun calculateDiff(callBack: MyRecyclerDiffCallBack<D>, newData: MutableList<D>) {
-        data.apply {
-            val result = DiffUtil.calculateDiff(callBack)
-            clear()
-            addAll(newData)
-            result.dispatchUpdatesTo(this@MyRecyclerAdapter)
-        }
+    fun <T> calculateDiff(mainData: MutableList<T>, newData: MutableList<T>) {
+        val result = DiffUtil.calculateDiff(MyRecyclerDiffCallBack(mainData, newData))
+        mainData.clear()
+        mainData.addAll(newData)
+        result.dispatchUpdatesTo(this@MyRecyclerAdapter)
+    }
+
+    fun getContext(): Context {
+        return MyApplication.instance
     }
 }
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="stopNameText"
+            type="String" />
+
+        <variable
+            name="estimateTimeText"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_item_padding">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/stopName"
+            style="@style/Theme.Traffic.TextView.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{stopNameText}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estimateTime"
+            style="@style/Theme.Traffic.TextView.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{estimateTimeText}"
+            app:layout_constraintBottom_toBottomOf="@id/stopName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/stopName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

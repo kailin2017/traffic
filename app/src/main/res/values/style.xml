@@ -5,16 +5,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Kailin" />
+    <style name="Theme.Traffic.TextView" />
 
-    <style name="Kailin.TextView" />
-
-    <style name="Kailin.TextView.Title">
+    <style name="Theme.Traffic.TextView.Title">
         <item name="android:textSize">@dimen/text_title</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Kailin.TextView.Text">
+    <style name="Theme.Traffic.TextView.Text">
         <item name="android:textSize">@dimen/text_text</item>
     </style>
 

@@ -1,6 +1,7 @@
 package com.kailin.traffic.data.bus.route
 
 import com.kailin.traffic.data.bus.NameType
+import java.io.Serializable
 
 data class SubRoute(
     val Direction: Int,
@@ -12,4 +13,4 @@ data class SubRoute(
     val SubRouteID: String,
     val SubRouteName: NameType,
     val SubRouteUID: String
-)
+) : Serializable

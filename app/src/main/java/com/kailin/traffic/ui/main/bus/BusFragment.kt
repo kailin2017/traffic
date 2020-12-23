@@ -1,14 +1,20 @@
 package com.kailin.traffic.ui.main.bus
 
-import com.kailin.traffic.R
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.kailin.traffic.app.BaseFragment
 import com.kailin.traffic.databinding.FragmentBusBinding
 
 class BusFragment : BaseFragment<BusViewModel, FragmentBusBinding>() {
 
-    override val viewModelClass = BusViewModel::class.java
+    override val viewModel: BusViewModel by viewModels()
 
-    override val viewLayoutRes = R.layout.fragment_bus
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = FragmentBusBinding.inflate(inflater, container, false)
 
     override fun initView() {
     }

@@ -8,12 +8,12 @@ import com.kailin.traffic.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-    override val viewModelClass: Class<MainViewModel> = MainViewModel::class.java
+    override val viewModel: MainViewModel by viewModels()
 
-    override val viewLayoutRes = R.layout.activity_main
+    override fun initBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun initView() {
-        with(findNavController(R.id.nav_host_fragment)) {
+        with(findNavController(R.id.navFragment)) {
             viewDataBinding.navView.setupWithNavController(this)
         }
         viewModel.initData()

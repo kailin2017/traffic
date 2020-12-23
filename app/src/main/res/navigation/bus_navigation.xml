@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bus_navigation"
+    app:startDestination="@+id/navigation_realtime">
+
+    <fragment
+        android:id="@+id/navigation_realtime"
+        android:name="com.kailin.traffic.ui.bus.realtime.RealtimeFragment"
+        tools:layout="@layout/fragment_bus_realtime" >
+        <action
+            android:id="@+id/action_navigation_realtime_to_navigation_info"
+            app:destination="@id/navigation_info" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_info"
+        android:name="com.kailin.traffic.ui.bus.info.InfoFragment"
+        tools:layout="@layout/fragment_bus_info" />
+
+</navigation>

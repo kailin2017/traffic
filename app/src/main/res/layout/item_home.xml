@@ -12,7 +12,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/view_my_search_padding">
+        android:layout_margin="@dimen/view_my_search_padding"
+        android:tag="@{data}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/routeTitle"
-                style="@style/Kailin.TextView.Title"
+                style="@style/Theme.Traffic.TextView.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{data.routeName.zh_tw}"
@@ -30,7 +31,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/routeText"
-                style="@style/Kailin.TextView.Text"
+                style="@style/Theme.Traffic.TextView.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{@string/search_route_from_to(data.destinationStopNameZh,data.departureStopNameZh)}"

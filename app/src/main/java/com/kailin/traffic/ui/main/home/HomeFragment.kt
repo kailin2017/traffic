@@ -1,25 +1,34 @@
 package com.kailin.traffic.ui.main.home
 
+import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import androidx.appcompat.widget.SearchView
 import com.kailin.traffic.R
 import com.kailin.traffic.app.BaseFragment
+import com.kailin.traffic.data.bus.route.BusRouteData
 import com.kailin.traffic.databinding.FragmentHomeBinding
+import com.kailin.traffic.ui.bus.BusRouteActivity
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
     SearchView.OnQueryTextListener {
 
-    override val viewModelClass = HomeViewModel::class.java
+    override val viewModel: HomeViewModel by viewModels()
 
-    override val viewLayoutRes = R.layout.fragment_home
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun initView() {
         viewDataBinding.apply {
             setToolbar(toolbar)
-            recyclerView.adapter = HomeRecyclerAdapter().apply {
+            recyclerView.adapter = HomeRecyclerAdapter {
+                if (it.tag is BusRouteData) {
+                    BusRouteActivity.startBusRouteActivity(requireContext(), it.tag as BusRouteData)
+                }
+            }.apply {
                 viewModel.searchBusRouteData.observe(this@HomeFragment, { updateData(it) })
             }
         }

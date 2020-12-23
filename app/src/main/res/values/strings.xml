@@ -7,4 +7,11 @@
     <string name="search_label">搜尋</string>
     <string name="search_null">查無相關路線</string>
     <string name="search_route_from_to">%1$s-%2$s</string>
+
+    <string name="estimateTime_Status1">尚未發車</string>
+    <string name="estimateTime_Status2">交管不停靠</string>
+    <string name="estimateTime_Status3">末班車已過</string>
+    <string name="estimateTime_Status4">今日未營運</string>
+    <string name="estimateTime_coming">即將進站</string>
+    <string name="estimateTime_estimate">%d分</string>
 </resources>
