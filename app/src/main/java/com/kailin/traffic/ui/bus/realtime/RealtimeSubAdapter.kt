@@ -14,20 +14,20 @@ class RealtimeSubAdapter : MyRecyclerAdapter<ItemSubRealtimeBinding, BusStop>() 
     override val viewLayoutRes = R.layout.item_sub_realtime
 
     override fun onBindViewHolder(holder: ViewHolder<ItemSubRealtimeBinding>, position: Int) {
-        with(holder.binding) {
-            val itemData = data[position]
-            stopNameText = itemData.StopName.Zh_tw
-            eData.find { it.StopUID == itemData.StopUID }?.let {
-                estimateTimeText = when (it.StopStatus) {
-                    1 -> getContext().getString(R.string.estimateTime_Status1)
-                    2 -> getContext().getString(R.string.estimateTime_Status2)
-                    3 -> getContext().getString(R.string.estimateTime_Status3)
-                    4 -> getContext().getString(R.string.estimateTime_Status4)
+        val itemData = data[position]
+        holder.binding.stopNameText = itemData.StopName.Zh_tw
+        eData.find { it.StopUID == itemData.StopUID }?.let {
+            getContext().apply {
+                holder.binding.estimateTimeText = when (it.StopStatus) {
+                    1 -> getString(R.string.estimateTime_Status1)
+                    2 -> getString(R.string.estimateTime_Status2)
+                    3 -> getString(R.string.estimateTime_Status3)
+                    4 -> getString(R.string.estimateTime_Status4)
                     else -> {
                         if (it.EstimateTime < 120) {
-                            getContext().getString(R.string.estimateTime_coming)
+                            getString(R.string.estimateTime_coming)
                         } else {
-                            getContext().getString(
+                            getString(
                                 R.string.estimateTime_estimate, it.EstimateTime / 60
                             )
                         }
