@@ -24,6 +24,10 @@ class RealtimeSubFragment : BaseFragment<BusRouteViewModel, FragmentSubRealtimeB
             viewDataBinding.recyclerView.adapter = adapter
             viewModel.estimateTimeData.observe(this, { adapter.updateEstimateTimeData(it) })
         }
+        viewModel.reciprocal.observe(this) {
+            viewDataBinding.progressMax = BusRouteViewModel.reciprocalDefault
+            viewDataBinding.progressInt = it
+        }
     }
 
     companion object {

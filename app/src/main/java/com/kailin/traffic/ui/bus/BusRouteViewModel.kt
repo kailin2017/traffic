@@ -12,17 +12,52 @@ class BusRouteViewModel : BaseViewModel() {
     val busRouteData: MutableLiveData<BusRouteData> by lazy { MutableLiveData() }
     val busStopOfRoute: MutableLiveData<MutableList<BusStopOfRoute>> by lazy { MutableLiveData() }
     val estimateTimeData: MutableLiveData<MutableList<EstimateTimeData>> by lazy { MutableLiveData() }
+    val reciprocal: MutableLiveData<Int> by lazy { MutableLiveData(reciprocalDefault) }
+    private val busService = BusService.instance
+    private lateinit var routeUidFilterString: String
+    private lateinit var routeCity: String
+    private lateinit var routeString: String
 
     fun initData(city: String, route: String, routeUid: String) {
-        val service = BusService.instance
-        val filterString = BusService.filterRouteUidString(routeUid)
-        rxJavaHelper.apply {
-            single(this@BusRouteViewModel, service.getBusStopOfRoute(city, route, filterString)) {
-                busStopOfRoute.postValue(it)
-            }
-            single(this@BusRouteViewModel, service.getEstimatedTime(city, route, filterString)) {
-                estimateTimeData.postValue(it)
-            }
+        routeUidFilterString = BusService.filterRouteUidString(routeUid)
+        routeCity = city
+        routeString = route
+        rxJavaHelper.single(
+            this@BusRouteViewModel,
+            busService.getBusStopOfRoute(city, route, routeUidFilterString)
+        ) {
+            busStopOfRoute.postValue(it)
         }
+        updateEstimateTime()
+    }
+
+
+    private fun updateEstimateTime() {
+        rxJavaHelper.single(
+            this@BusRouteViewModel,
+            busService.getEstimatedTime(routeCity, routeString, routeUidFilterString)
+        ) {
+            estimateTimeData.postValue(it)
+            reciprocalReset()
+        }
+    }
+
+    private fun reciprocalReset() {
+        reciprocal.postValue(reciprocalDefault)
+        rxJavaHelper.reciprocal(this, 1, reciprocalDefault.toLong(), tag, {
+            reciprocal.postValue((reciprocalDefault - it).toInt())
+        }) {
+            updateEstimateTime()
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        rxJavaHelper.dispose(tag)
+    }
+
+    companion object {
+        const val reciprocalDefault = 20
+        private const val tag = "BusRouteViewModel"
     }
 }
