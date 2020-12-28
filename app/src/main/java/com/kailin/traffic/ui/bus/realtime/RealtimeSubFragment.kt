@@ -20,7 +20,7 @@ class RealtimeSubFragment : BaseFragment<BusRouteViewModel, FragmentSubRealtimeB
 
     override fun initView() {
         BusStopOfRoute.fromBundle(arguments)?.let {
-            val adapter = RealtimeSubAdapter().apply { updateData(it.Stops) }
+            val adapter = RealtimeSubAdapter().apply { updateBusStopOfRoute(it) }
             viewDataBinding.recyclerView.adapter = adapter
             viewModel.estimateTimeData.observe(this, { adapter.updateEstimateTimeData(it) })
         }

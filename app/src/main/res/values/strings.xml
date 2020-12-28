@@ -8,6 +8,9 @@
     <string name="search_null">查無相關路線</string>
     <string name="search_route_from_to">%1$s-%2$s</string>
 
+    <string name="busRoute_to">往&#160;%s</string>
+    <string name="busRoute_tos">%1$s\n往&#160;%2$s</string>
+
     <string name="estimateTime_Status1">尚未發車</string>
     <string name="estimateTime_Status2">交管不停靠</string>
     <string name="estimateTime_Status3">末班車已過</string>

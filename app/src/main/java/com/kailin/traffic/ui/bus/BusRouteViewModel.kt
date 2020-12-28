@@ -14,17 +14,17 @@ class BusRouteViewModel : BaseViewModel() {
     val estimateTimeData: MutableLiveData<MutableList<EstimateTimeData>> by lazy { MutableLiveData() }
     val reciprocal: MutableLiveData<Int> by lazy { MutableLiveData(reciprocalDefault) }
     private val busService = BusService.instance
-    private lateinit var routeUidFilterString: String
+    private lateinit var routeFilter: String
     private lateinit var routeCity: String
     private lateinit var routeString: String
 
     fun initData(city: String, route: String, routeUid: String) {
-        routeUidFilterString = BusService.filterRouteUidString(routeUid)
+        routeFilter = BusService.filterRouteUidString(routeUid)
         routeCity = city
         routeString = route
         rxJavaHelper.single(
             this@BusRouteViewModel,
-            busService.getBusStopOfRoute(city, route, routeUidFilterString)
+            busService.getBusStopOfRoute(city, route, routeFilter)
         ) {
             busStopOfRoute.postValue(it)
         }
@@ -34,8 +34,8 @@ class BusRouteViewModel : BaseViewModel() {
 
     private fun updateEstimateTime() {
         rxJavaHelper.single(
-            this@BusRouteViewModel,
-            busService.getEstimatedTime(routeCity, routeString, routeUidFilterString)
+            this,
+            busService.getEstimatedTime(routeCity, routeString, routeFilter)
         ) {
             estimateTimeData.postValue(it)
             reciprocalReset()
