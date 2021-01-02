@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_info"
-        android:name="com.kailin.traffic.ui.main.bus.BusFragment"
+        android:name="com.kailin.traffic.ui.main.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_bus" />
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
