@@ -18,6 +18,5 @@ class MapFragment() : BaseFragment<BusRouteViewModel, FragmentBusMapBinding>() {
     ) = FragmentBusMapBinding.inflate(inflater, container, false)
 
     override fun initView() {
-        TODO("Not yet implemented")
     }
 }

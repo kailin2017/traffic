@@ -6,6 +6,7 @@
     android:orientation="vertical"
     app:behavior_hideable="false"
     app:behavior_peekHeight="120dp"
+    android:background="?attr/colorOnPrimary"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <fragment
@@ -14,6 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main_navigation" />
+        app:navGraph="@navigation/bus_navigation" />
 
 </FrameLayout>

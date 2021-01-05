@@ -13,6 +13,7 @@ buildscript {
     ext.lifecycle_version = "2.2.0"
     ext.room_version = "2.3.0-alpha03"
     ext.workManager_version = "2.4.0"
+    ext.gmap_version = "2.2.0"
     repositories {
         google()
         jcenter()

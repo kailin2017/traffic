@@ -82,6 +82,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // workManager
     implementation "androidx.work:work-runtime-ktx:$workManager_version"
+    // gmap
+    implementation "com.google.maps.android:maps-v3-ktx:$gmap_version"
+    implementation "com.google.maps.android:maps-utils-v3-ktx:$gmap_version"
 
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'

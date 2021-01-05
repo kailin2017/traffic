@@ -17,4 +17,5 @@
     <string name="estimateTime_Status4">今日未營運</string>
     <string name="estimateTime_coming">即將進站</string>
     <string name="estimateTime_estimate">%d分</string>
+
 </resources>
