@@ -39,7 +39,7 @@ abstract class MyRecyclerAdapter<V : ViewDataBinding, D>(private val onItemClick
         val result = DiffUtil.calculateDiff(MyRecyclerDiffCallBack(mainData, newData))
         mainData.clear()
         mainData.addAll(newData)
-        result.dispatchUpdatesTo(this@MyRecyclerAdapter)
+        result.dispatchUpdatesTo(this)
     }
 
     fun getContext(): Context {

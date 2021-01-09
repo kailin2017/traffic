@@ -1,10 +1,12 @@
 package com.kailin.traffic.ui.main
 
+import android.Manifest
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kailin.traffic.R
 import com.kailin.traffic.app.BaseActivity
 import com.kailin.traffic.databinding.ActivityMainBinding
+import com.kailin.traffic.util.permission.PermissionHelper
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
@@ -17,5 +19,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             viewDataBinding.navView.setupWithNavController(this)
         }
         viewModel.initData()
+        PermissionHelper.instance.checkPermission(
+            activity = this,
+            permissions = arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            deniedCallback = { finish() }
+        )
     }
 }

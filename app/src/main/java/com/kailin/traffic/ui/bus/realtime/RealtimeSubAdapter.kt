@@ -15,6 +15,8 @@ class RealtimeSubAdapter : MyRecyclerAdapter<ItemSubRealtimeBinding, BusStop>() 
     private lateinit var busStopOfRoute: BusStopOfRoute
 
     override fun onBindViewHolder(holder: ViewHolder<ItemSubRealtimeBinding>, position: Int) {
+        if (position > data.size - 1)
+            return
         with(holder.binding) {
             val itemData = data[position]
             stopNameText = itemData.StopName.Zh_tw

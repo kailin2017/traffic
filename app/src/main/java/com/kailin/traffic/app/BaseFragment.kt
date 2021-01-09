@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +16,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
+import com.kailin.traffic.R
 import com.kailin.traffic.widget.DialogHelper
 
 abstract class BaseFragment<M : BaseViewModel, V : ViewDataBinding> : Fragment() {
@@ -36,7 +39,7 @@ abstract class BaseFragment<M : BaseViewModel, V : ViewDataBinding> : Fragment()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        with(viewModel){
+        with(viewModel) {
             msgText.observe(viewLifecycleOwner, {
                 dialogHelper.msgDialog(requireContext(), msg = it)
             })
@@ -59,15 +62,20 @@ abstract class BaseFragment<M : BaseViewModel, V : ViewDataBinding> : Fragment()
 
     protected abstract fun initView()
 
-    protected fun progressOn() {}
+    protected open fun progressOn() {}
 
-    protected fun progressOff() {}
+    protected open fun progressOff() {}
 
-    protected fun setToolbar(toolbar: Toolbar) {
+    protected fun setToolbar(toolbar: Toolbar, title: String? = null, isShowBack: Boolean = false) {
         requireActivity().apply {
             if (this is AppCompatActivity) {
                 setSupportActionBar(toolbar)
                 setHasOptionsMenu(true)
+                if (isShowBack) {
+                    toolbar.title = title
+                    toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
+                    toolbar.setNavigationOnClickListener { onBackPressed() }
+                }
             }
         }
     }

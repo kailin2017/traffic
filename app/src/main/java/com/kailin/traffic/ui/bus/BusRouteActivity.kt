@@ -3,17 +3,18 @@ package com.kailin.traffic.ui.bus
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.coroutineScope
-import com.google.android.libraries.maps.CameraUpdateFactory
 import com.google.android.libraries.maps.SupportMapFragment
-import com.google.android.libraries.maps.model.LatLng
 import com.google.maps.android.ktx.awaitMap
 import com.kailin.traffic.R
 import com.kailin.traffic.app.BaseActivity
 import com.kailin.traffic.data.bus.route.BusRouteData
 import com.kailin.traffic.databinding.ActivityBusRouteBinding
+import com.kailin.traffic.util.MapHelper
 
 class BusRouteActivity : BaseActivity<BusRouteViewModel, ActivityBusRouteBinding>() {
 
+    private lateinit var mapHelper: MapHelper
+    private lateinit var mapFragment: SupportMapFragment
     override val viewModel: BusRouteViewModel by viewModels()
 
 //    private lateinit var bottomBehavior: BottomSheetBehavior<View>
@@ -25,25 +26,19 @@ class BusRouteActivity : BaseActivity<BusRouteViewModel, ActivityBusRouteBinding
             viewModel.busRouteData.postValue(it)
             viewModel.initData(it.City, it.RouteName.Zh_tw, it.RouteUID)
         }
-        supportFragmentManager.findFragmentById(R.id.mapFragment)?.let {
-            if (it is SupportMapFragment)
-                lifecycle.coroutineScope.launchWhenCreated {
-                    val googleMap = it.awaitMap()
-                    googleMap.moveCamera(
-                        CameraUpdateFactory.newLatLngZoom(LatLng(51.403186, -0.126446), 10F)
-                    )
-                }
+
+        mapFragment =
+            supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+
+        lifecycle.coroutineScope.launchWhenCreated {
+            mapHelper = MapHelper(this@BusRouteActivity, mapFragment.awaitMap())
+            mapHelper.moveCameraByLocation(viewModel::onError)
         }
-//        bottomBehavior = BottomSheetBehavior.from(viewDataBinding.bottomSheet)
-//        setBottomViewVisible(bottomBehavior.state != BottomSheetBehavior.STATE_EXPANDED)
+
+        viewModel.selectedPage.observe(this) { p ->
+            viewModel.busStopOfRoute.value?.let { mapHelper.drawBusStopOfRoute(it[p]) }
+        }
     }
-//    private fun setBottomViewVisible(showFlag: Boolean) {
-//        bottomBehavior.state = if (showFlag) {
-//            BottomSheetBehavior.STATE_EXPANDED
-//        } else {
-//            BottomSheetBehavior.STATE_COLLAPSED
-//        }
-//    }
 
     companion object {
 

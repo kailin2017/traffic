@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(),
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         with(menu) {
-            inflater.inflate(R.menu.toolbar_menu, this)
+            inflater.inflate(R.menu.menu_toolbar_home, this)
             findItem(R.id.toolbar_search).actionView.apply {
                 if (this is SearchView) {
                     Log.e("onCreateOptionsMenu", "SearchView")

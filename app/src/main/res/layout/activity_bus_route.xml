@@ -2,21 +2,14 @@
 <layout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-<!--        <include-->
-<!--            android:id="@+id/content"-->
-<!--            layout="@layout/activity_bus_route_content" />-->
-
-        <fragment
-            android:id="@+id/mapFragment"
-            android:name="com.google.android.libraries.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <include
+            android:id="@+id/content"
+            layout="@layout/activity_bus_route_content" />
 
         <include
             android:id="@+id/bottomSheet"

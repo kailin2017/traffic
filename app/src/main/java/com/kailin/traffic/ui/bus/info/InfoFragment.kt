@@ -7,9 +7,9 @@ import com.kailin.traffic.app.BaseFragment
 import com.kailin.traffic.databinding.FragmentBusInfoBinding
 import com.kailin.traffic.ui.bus.BusRouteViewModel
 
-class InfoFragment() : BaseFragment<BusRouteViewModel, FragmentBusInfoBinding>() {
+class InfoFragment : BaseFragment<BusRouteViewModel, FragmentBusInfoBinding>() {
 
-    override val viewModel: BusRouteViewModel by viewModels()
+    override val viewModel: BusRouteViewModel by activityViewModels()
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -18,6 +18,10 @@ class InfoFragment() : BaseFragment<BusRouteViewModel, FragmentBusInfoBinding>()
     ) = FragmentBusInfoBinding.inflate(inflater, container, false)
 
     override fun initView() {
-        TODO("Not yet implemented")
+        viewDataBinding.apply {
+            viewModel.busRouteData.observe(this@InfoFragment, {
+                setToolbar(toolbar, it.RouteName.Zh_tw, true)
+            })
+        }
     }
 }

@@ -6,7 +6,7 @@
 
         <fragment
             android:id="@+id/mapFragment"
-            android:name="com.google.android.libraries.maps.MapFragment"
+            android:name="com.google.android.libraries.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

@@ -13,6 +13,7 @@ class BusRouteViewModel : BaseViewModel() {
     val busStopOfRoute: MutableLiveData<MutableList<BusStopOfRoute>> by lazy { MutableLiveData() }
     val estimateTimeData: MutableLiveData<MutableList<EstimateTimeData>> by lazy { MutableLiveData() }
     val reciprocal: MutableLiveData<Int> by lazy { MutableLiveData(reciprocalDefault) }
+    val selectedPage: MutableLiveData<Int> by lazy { MutableLiveData(reciprocalDefault) }
     private val busService = BusService.instance
     private lateinit var routeFilter: String
     private lateinit var routeCity: String

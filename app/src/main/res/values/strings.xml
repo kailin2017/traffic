@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">traffic</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="navigation_realtime">Home</string>
+    <string name="navigation_info">Dashboard</string>
+    <string name="navigation_notifications">Notifications</string>
 
-    <string name="search_label">搜尋</string>
+    <string name="toolbar_info">資訊</string>
+
+    <string name="toolbar_search_title">搜尋</string>
     <string name="search_null">查無相關路線</string>
     <string name="search_route_from_to">%1$s-%2$s</string>
 

@@ -1,14 +1,16 @@
 package com.kailin.traffic.ui.bus.realtime
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
+import androidx.navigation.fragment.NavHostFragment
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kailin.traffic.R
 import com.kailin.traffic.app.BaseFragment
 import com.kailin.traffic.databinding.FragmentBusRealtimeBinding
 import com.kailin.traffic.ui.bus.BusRouteViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.math.abs
 
 class RealtimeFragment : BaseFragment<BusRouteViewModel, FragmentBusRealtimeBinding>() {
@@ -24,8 +26,7 @@ class RealtimeFragment : BaseFragment<BusRouteViewModel, FragmentBusRealtimeBind
     override fun initView() {
         viewDataBinding.apply {
             viewModel.busRouteData.observe(this@RealtimeFragment, {
-                toolbar.title = it.RouteName.Zh_tw
-                setToolbar(toolbar)
+                setToolbar(toolbar, it.RouteName.Zh_tw, true)
             })
             viewModel.busStopOfRoute.observe(this@RealtimeFragment) {
                 pager.adapter = RealtimeAdapter(requireActivity()).apply { updateData(it) }
@@ -48,21 +49,18 @@ class RealtimeFragment : BaseFragment<BusRouteViewModel, FragmentBusRealtimeBind
                     scaleY = scale
                 }
             }
+            pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) =
+                    viewModel.selectedPage.postValue(position)
+            })
         }
     }
 
     private fun tabConfigurationStrategy(tab: TabLayout.Tab, p: Int) {
-        viewModel.busRouteData.value?.let { busRouteData ->
-            viewModel.busStopOfRoute.value?.let {
-                tab.text = if (it.size > 2) {
-                    getString(
-                        R.string.busRoute_tos, it[p].SubRouteName.Zh_tw, when (it[p].Direction) {
-                            0 -> busRouteData.DepartureStopNameZh
-                            else -> busRouteData.DestinationStopNameZh
-                        }
-                    )
-                } else {
-                    getString(
+        with(viewModel) {
+            busRouteData.value?.let { busRouteData ->
+                busStopOfRoute.value?.let {
+                    tab.text = getString(
                         R.string.busRoute_to, when (it[p].Direction) {
                             0 -> busRouteData.DepartureStopNameZh
                             else -> busRouteData.DestinationStopNameZh
@@ -71,6 +69,22 @@ class RealtimeFragment : BaseFragment<BusRouteViewModel, FragmentBusRealtimeBind
                 }
             }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_toolbar_reailtime, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbar_info -> {
+                NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_navigation_realtime_to_navigation_info)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 }
